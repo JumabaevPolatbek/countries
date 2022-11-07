@@ -1,36 +1,35 @@
 import React from 'react';
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import Layout from './components';
+import SelectCountrie from './components/SelectCountrie/SelectCountrie';
+import CountriesLayout from './components/Countries/CountriesLayout';
 import { useSelector } from 'react-redux';
-import Countries from './components/Countries/Countries';
-import { selectCountries } from './redux/reducers/selectCountries';
-
+import { ThemeProvider,createTheme } from '@mui/material/styles';
+import { selectTheme } from './redux/reducers/selects';
+import CssBaseline from '@mui/material/CssBaseline';
 
 
 function App() {
-  const state = useSelector(selectCountries);
-  
+  const themeSelect = useSelector(selectTheme);
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: themeSelect.dark?'dark':'light'
+    }
+  })
   return (
-    <div className="App">
-      <header>
-        <button>Светлый</button>
-      </header>
-      <main>
-        <div className='main-container'>
-          <div>
-            <input type="search" placeholder='Искать'/>
-          </div>
-          <div>
-            <select name="filter" id="" >
-                <option value="filter">Филтьр</option>
-            </select>
-          </div>
-        </div>
-        <div className='countries'>
-          {state.map((countrie, index) => {
-              return <Countries countrie={countrie} key={index}/>
-            })}
-        </div>
-      </main>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+    <BrowserRouter>
+      <Routes>
+          <Route element={<Layout />} >
+          <Route path='/' element={<CountriesLayout/>}/>
+          <Route path='/:id' element={<SelectCountrie />} />
+        </Route>
+          <Route path="*" element={<p>404 Not Found</p>} />
+        </Routes>
+      </BrowserRouter>
+      </ThemeProvider>
   );
 }
 

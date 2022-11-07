@@ -3,14 +3,21 @@
 //     return fetch('https://restcountries.com/#api-endpoints-v2-all').then(response=>response.json()).then(json=>json)
 // }
 
+import Countries from "../../components/Countries/Countries";
 import { ActionCountries } from "../actions/countriesAction";
 import { Countrie } from "../types/countriesType";
 
-export const getApiCountriesReducer = (state:Countrie[] =[], action: any) => {
+const defaultState = {
+    countries: [],
+    loadData:false
+}
+
+export const getApiCountriesReducer = (state=defaultState, action: any) => {
     switch (action.type) {
         case ActionCountries.FETCH:
-            console.log(action.payload)
-            return [...state, ...action.payload];
+            return { ...state, loadData: action.payload ? true : false }
+        case ActionCountries.SET_FETCH:
+            return { ...state, countries: action.payload, loadData: true };
         default:
             return state
     }

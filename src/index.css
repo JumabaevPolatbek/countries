@@ -16,13 +16,24 @@ header{
   background-color: rgb(16, 30, 61);
   padding: 15px 25px;
 }
+#root{
+  width: 100%;
+  max-width: 1920px;
+}
 .App{
   max-width: 1420px;
   width: 100%;
   margin: 0 auto;
 }
 .countries{
+  margin-top: 15px;
+  padding: 0 15px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
+}
+.countrie{
+  height: 450px;
+  margin: 30px !important;
+  width: 300px;
 }

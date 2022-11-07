@@ -1,0 +1,30 @@
+.container{
+    width: 100%;
+    max-width: 1920px;
+    padding: 0 15px;
+    color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+.container>*{
+    color: inherit;
+    font: inherit;
+}
+.select-countrie{
+    display: flex;
+    flex-direction: column;
+}
+
+.countrie-info{
+    display: flex;
+    align-items: center;
+}
+.content{
+    display: flex;
+}
+.countries-content:last-child{
+    align-self: center;
+}

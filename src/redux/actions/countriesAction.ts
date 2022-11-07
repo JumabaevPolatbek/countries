@@ -1,3 +1,5 @@
+import { Countrie } from "../types/countriesType";
+
 export enum ActionCountries{
     FETCH = "FETCH",
     SET_FETCH="SET_FETCH"
@@ -5,23 +7,21 @@ export enum ActionCountries{
 
 type FetchApi = {
     type: ActionCountries.FETCH
-    payload:any
 }
-type SetFetchApi = {
+type SetApi = {
     type: ActionCountries.SET_FETCH,
-    payload:string
+    payload:Countrie
 }
 
-export type ActionsCountries = FetchApi | SetFetchApi;
+export type ActionsCountries = FetchApi | SetApi;
 
-export const fetchApi = (data:any) => {
+export const fetchApi = () => {
     return {
         type: ActionCountries.FETCH,
-        payload:data
     }
 }
 
-export const setFetchApi = (data:string) => {
+export const setFetchApi = (data:Countrie) => {
     return {
         type: ActionCountries.SET_FETCH,
         payload:data

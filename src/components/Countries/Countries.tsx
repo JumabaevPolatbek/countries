@@ -1,27 +1,32 @@
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
-import { selectCountries } from "../../redux/reducers/selectCountries"
 import { Countrie } from "../../redux/types/countriesType"
+import Link from '@mui/material/Link';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Paper from "@mui/material/Paper";
+import CountrieHeader from "./CountrieHeader";
+import CountrieInfo from "./CountrieInfo";
+import React from 'react'
+import { ActionCountries } from "../../redux/actions/countriesAction";
 import './countries.css'
 type Props = {
     countrie:Countrie
 }
 export default function Countries({ countrie }: Props) {
-    
-    const dispatch = useDispatch();
-    const countries = useSelector(selectCountries)
-    
     return (
-        <a className="countrie" href={countrie.name}>
-            <div className="countrie-flag">
-                <img src={countrie.flag} alt={countrie.name} />
-            </div>
-            <div className="countrie-info">
-                <p>{ countrie.name}</p>
-                <span>Population:  {countrie.population }</span>
-                <span>Region: { countrie.region}</span>
-                <span>Capital:  { countrie.capital}</span>
-            </div>
-        </a>
+      <Link className="countrie" href={countrie.alpha3Code.toLowerCase()} underline="none">
+        <Paper >
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+              <CountrieHeader name={countrie.name} flag={countrie.flag} />
+              <CountrieInfo region={countrie.subregion } capital={countrie.capital} population={countrie.population} />
+              </CardContent>
+              <CardActions>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
+        </Paper>
+        </Link>
     )
 }
