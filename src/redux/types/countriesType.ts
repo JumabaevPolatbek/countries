@@ -34,8 +34,14 @@ export type GetCountriesApi = {
     countries: Countrie[],
     loadData:boolean
 }
+export type SelectedRegion={
+    region:string
+}
+export type SearchValue=string;
 export type StateSagas = {
     apiCountries: GetCountriesApi,
     getCountrie: GetCountrie,
-    changeTheme:StateTheme
+    changeTheme:StateTheme,
+    regionSelect:SelectedRegion,
+    search:SearchValue
 }

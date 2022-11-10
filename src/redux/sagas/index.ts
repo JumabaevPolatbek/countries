@@ -1,7 +1,9 @@
-import { put ,call, take, spawn} from 'redux-saga/effects'
+import { put ,call, take, spawn, takeEvery} from 'redux-saga/effects'
 import { ActionsCountrie } from '../actions/countrieActions';
 import { ActionCountries } from '../actions/countriesAction';
+import { ActionFormSelect } from '../actions/formSelectActions';
 import { ActionsTheme } from '../actions/themeActions';
+import { ActionSearch } from '../reducers/searchCountrie';
 
 
 function* loadCountries(): any {
@@ -57,11 +59,32 @@ function* setDark() {
         payload:changeTheme()?false:true
     })
 }
+function* setRegion(){
+    const {payload}= yield take(ActionFormSelect.SELECT);
+    yield put({
+        type:ActionFormSelect.SELECT,
+        payload:payload
+    })
+}
+
+// function* searchCountrie(){
+//     const {payload}=yield take(ActionSearch.SEARCH)
+//    yield put({
+//     type:ActionSearch.SEARCH,
+//     payload:payload
+//    })
+// }
+
+// function* setSearchValue(){
+//     yield takeEvery(ActionSearch.SEARCH,searchCountrie)
+// }
 
 function* rootSaga() {
-    yield spawn(setDark)
+    yield spawn(setDark);
     yield spawn(loadCountries);
     yield spawn(getCountriePage);
+    yield spawn(setRegion);
+    // yield spawn(setSearchValue)
 }
 
 export default rootSaga

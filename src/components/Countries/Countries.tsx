@@ -10,12 +10,21 @@ import CountrieInfo from "./CountrieInfo";
 import React from 'react'
 import { ActionCountries } from "../../redux/actions/countriesAction";
 import './countries.css'
+import { useSelector } from "react-redux";
+import { selectRegion } from "../../redux/reducers/selects";
 type Props = {
     countrie:Countrie
 }
 export default function Countries({ countrie }: Props) {
+    const selectedRegion=useSelector(selectRegion);
+    
     return (
-      <Link className="countrie" href={countrie.alpha3Code.toLowerCase()} underline="none">
+      <Link className="countrie" 
+      href={countrie.alpha3Code.toLowerCase()}
+       underline="none" 
+       display={
+        selectedRegion.region!==''?(countrie.region===selectedRegion.region?'inline-block':'none'):'inline-block'
+       }>
         <Paper >
             <Card sx={{ minWidth: 275 }}>
               <CardContent>

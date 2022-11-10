@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux';
 import { selectTheme } from '../../redux/reducers/selects';
 import { useDispatch } from 'react-redux';
 import {  changeTheme } from '../../redux/actions/themeActions';
+import FormSelect from '../FormSelect';
+import Search from '../Search';
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
@@ -20,14 +22,16 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" className='header'>
                 <Toolbar>
-                    <Switch {...label} onChange={(e) => {
+                    <Switch {...label} onChange={(e: { currentTarget: { checked: boolean; }; }) => {
                         dispatch(changeTheme(e.currentTarget.checked))} } />
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 {themeSelect.dark===true?'Свелтый':'Темный'}
                         </Typography>
                 </Toolbar>
+                <Search/>
+                <FormSelect/>
             </AppBar>
     </Box>
   );
